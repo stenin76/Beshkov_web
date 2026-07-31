@@ -1,0 +1,234 @@
+/* 1. Main Outer Carousel Container */
+.carousel {
+  position: relative;
+  max-width: 800px; /* Limits maximum width on big screens */
+  width: 100%;       /* Allows it to shrink fluidly on small screens */
+  margin: 0 auto;    /* Centers the carousel horizontally */
+  overflow: hidden;  /* Hides the hidden slides waiting in line */
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* 2. The Sliding Track (Holds all slides side-by-side) */
+.slides1 {
+  display: flex;
+  width: 100%;
+  transition: transform 0.4s ease-in-out; /* Smooth transition when shifting slides */
+}
+
+/* 3. Individual Slide Wrapper */
+.slide-g {
+  min-width: 100%; /* Forces exactly ONE slide to occupy the viewport at a time */
+  box-sizing: border-box;
+  /* Uniform aspect ratio prevents layout shifts on different screen sizes */
+  aspect-ratio: 16 / 9;
+}
+
+/* 4. The Image Inside the Slide */
+.slide-g img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crops image cleanly to prevent squishing or distortion */
+  display: block;
+}
+
+/* Navigation buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1f4331cf;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: white;
+  font-size: 34px;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease, background 0.3s ease;
+  box-shadow: 0 0 8px #4bd342;
+  user-select: none;
+  z-index: 10;
+  filter: drop-shadow(0 0 6px #77c524);
+  animation: neonPulse 3s infinite alternate;
+}
+
+.nav-btn:hover {
+  background: #e9fcda;
+  box-shadow: 0 0 25px #4ad61b;
+  color: #1f4331cf;
+}
+
+.nav-left {
+  left: 20px;
+}
+.nav-right {
+  right: 20px;
+}
+
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 8px #72d11a;
+    filter: drop-shadow(0 0 6px #4bdd11);
+  }
+  100% {
+    box-shadow: 0 0 20px #50cf11;
+    filter: drop-shadow(0 0 18px #43d31b);
+  }
+}
+
+/* 6. Navigation Dots Container (Bottom Indicators) */
+.dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%); /* Centers dots horizontally */
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+/* Individual Dot Styles (Targeted via JavaScript injection) */
+.dot {
+  width: 14px;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dot.active {
+  background: #e9fcda; /* Highlights the active slide dot */
+  border: 2px solid #004228;
+}
+
+/* 7. Mobile Adjustments */
+@media (max-width: 576px) {
+  .slide-g {
+    aspect-ratio: 4 / 3 !important; /* Променете на 1 / 1 ако искате перфектен квадрат */
+  }
+
+  .dots{
+    display:grid;
+    grid-template-columns:repeat(11,1fr);
+    gap:6px;
+    width:max-content;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+  }
+
+  .nav-btn{
+    width:45px;
+    height:45px;
+    font-size:18px;
+    transform:translateY(40%);
+  }
+
+}
+
+/* 1. Обновяваме контейнера на слайда */
+.slide-g {
+  min-width: 100%;
+  box-sizing: border-box;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 2. Ефектът на преминаващата сянка/блясък */
+.slide-g::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+
+  background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          rgba(255, 255, 255, 0) 100%
+  );
+
+  transform: skewX(-25deg);
+
+  /* КОРИГИРАНО: Увеличено от 0.6s на 1.5s за много по-бавно и плавно движение */
+  transition: left 1.5s ease-in-out;
+  pointer-events: none;
+}
+
+/* 3. Активиране при задържане (Hover) */
+.slide-g:hover::after {
+  left: 150%;
+}
+
+/* 4. Настройка на скоростта на самата снимка */
+.slide-g img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* КОРИГИРАНО: Увеличено на 1.5s, за да съвпада с бавния темп на блясъка */
+  transition: transform 1.5s ease-in-out;
+}
+
+.slide-g:hover img {
+  transform: scale(1.04); /* Леко и бавно приближаване */
+}
+
+.slide-g {
+  min-width: 100%;
+  box-sizing: border-box;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Настройки за блясъка/сянката */
+.slide-g::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+
+/* Когато JS добави този клас, стартираме бавната анимация (1.8 секунди) */
+.slide-g.active-shine::after {
+  animation: slowShine 2.8s ease-in-out forwards;
+}
+
+/* Дефинираме движението от ляво надясно */
+@keyframes slowShine {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+/* Анимация за бавното приближаване на самата снимка, докато е активна */
+.slide-g img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 2s ease-in-out;
+}
+
+.slide-g.active-shine img {
+  transform: scale(1.04);
+}

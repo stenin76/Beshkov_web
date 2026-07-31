@@ -1,0 +1,173 @@
+html {
+  scroll-padding-top: 120px; /* Стойността покрива височината на менюто + неговия маржин */
+}
+
+.gtco-nav{
+  display: flex;
+  position: fixed;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  z-index: 1001;
+  transition: 0.3s;
+  justify-content: space-around;
+  align-items: center;     /* vertical centering */
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.fh5co-main-nav .fh5co-menu-1 {
+  font-size: 14px;
+  text-align: center;
+  width: auto;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 8px 0;
+}
+
+.fh5co-menu-1 a {
+  position: relative;
+  text-decoration: none;
+  padding-bottom: 5px;
+}
+
+.fh5co-menu-1 a:not(.no-underline)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 2px;              /* underline thickness */
+  background-color: #B3DF56; /* underline color */
+  transform: scaleX(0);      /* hidden */
+  transform-origin: left;    /* start from left */
+  transition: transform 0.3s ease;
+}
+
+.fh5co-menu-1 a:not(.no-underline):hover::after {
+  transform: scaleX(1);      /* animate to full width */
+}
+
+.fh5co-main-nav .fh5co-menu-1 a {
+  padding: 0 20px;
+  color: white;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+.fh5co-main-nav .fh5co-menu-1 a:hover, .fh5co-main-nav .fh5co-menu-1 a:focus, .fh5co-main-nav .fh5co-menu-1 a:active,
+.fh5co-main-nav .fh5co-menu-2 a:hover,
+.fh5co-main-nav .fh5co-menu-2 a:focus,
+.fh5co-main-nav .fh5co-menu-2 a:active,
+.fh5co-main-nav .fh5co-logo a:hover,
+.fh5co-main-nav .fh5co-logo a:focus,
+.fh5co-main-nav .fh5co-logo a:active {
+  outline: none;
+  text-decoration: none;
+}
+
+.fh5co-main-nav .fh5co-menu-1 a:hover {
+  color: #B3DF56;
+}
+
+.fh5co-main-nav .fh5co-menu-1 a.active,
+.fh5co-main-nav .fh5co-menu-2 a.active,
+.fh5co-main-nav .fh5co-logo a.active {
+  color: #B3DF56;
+}
+
+@media screen and (max-width: 768px) {
+  .gtco-nav {
+    padding: 0 10px;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .gtco-nav .menu-1, .gtco-nav .menu-2 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .fh5co-main-nav .fh5co-menu-2 {
+    font-size: 14px;
+    padding: 3px;
+  }
+}
+
+.gtco-nav.scrolled {
+  background: #1f4331;
+  box-shadow: 0 2px 18px 0 rgb(0 0 0 / .3);
+  opacity: 0.9;
+}
+
+.gtco-nav.scrolled a {
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .btn.btn-primary.btn-outline.no-underline.scrolled {
+    background: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #gtco-hero .text-left {
+    text-align: center !important;
+  }
+}
+
+/* scroll to top button */
+#button-up {
+  display: inline-block;
+  background: #1f4331cf;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s,
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  color: white;
+}
+
+#button-up::after {
+  content: "\f077";
+  font-family: FontAwesome, serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+}
+
+#button-up:hover {
+  cursor: pointer;
+  background-color: #e9fcda;
+  text-decoration: none;
+  color: #2e5051;
+}
+
+#button-up.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media screen and (max-width: 768px) {
+  #button-up:hover {
+    cursor: pointer;
+    background-color: #B3DF56;
+    text-decoration: none;
+    color: #fff;
+  }
+}
